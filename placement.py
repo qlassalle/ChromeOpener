@@ -1,19 +1,17 @@
 import os
 import time
+import random
 
-j = 0
-commands = ["u", "i", "j", "k"]
+magnet_shortcut = ["u", "i", "j", "k"]
 
-for i in (0, 3):
-	for i in range(0, 3):
-		launchChrome = f"/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome https://eurosport.com/ --args --profile-directory=\"coinlist{j}\" &"
-		os.system(launchChrome)
+for j in range(0, 4):
+	for i in range(0, 4):
+		profile_number = random.randint(1,100000)
+		launch_chrome_cmd = f"/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome https://eurosport.com/ --args --profile-directory=Person{profile_number} &"
+		os.system(launch_chrome_cmd)
 		time.sleep(5)
-		cmd = f"osascript -e 'tell application \"System Events\" to keystroke \"{commands[i]}\" using " + "{option down, control down}'"
-		# minimize active window
+		cmd = f"osascript -e 'tell application \"System Events\" to keystroke \"{magnet_shortcut[i]}\" using " + "{option down, control down}'"
 		os.system(cmd)
-		j = j + 1
 
 	cmd = f"osascript -e 'tell application \"System Events\" to key code 124 using " + "{control down}'"
 	os.system(cmd)
-	j = j + 1
